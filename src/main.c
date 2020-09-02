@@ -19,7 +19,7 @@ int main(void)
     
     while (1)
     {
-	    if (GPIOC->IDR & GPIO_IDR_ID13_Msk)
+	    if (!(GPIOC->IDR & GPIO_IDR_ID13_Msk))
 	    {
 		    GPIOA->BSRR |= GPIO_BSRR_BS5;
 	    }
