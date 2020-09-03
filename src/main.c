@@ -1,13 +1,10 @@
 #include "stm32f401xe.h"
+#include <math.h>
+#include "core_cm4.h"
 
-#define LED_GPIO        GPIOA
-#define LED_PIN         5
+static volatile uint32_t ticks = 0;
 
-
-static void delay(unsigned time) {
-    for (unsigned i=0; i<time; i++)
-        for (volatile unsigned j=0; j<20000; j++);
-}
+static void enable_SysTick(void);
 
 int main(void) 
 {
@@ -16,17 +13,38 @@ int main(void)
     //GPIO Setup (PC13 Button, PA5 LED)
     GPIOA->MODER |= (GPIO_MODER_MODE5_0);
     //Button configured as Input by default
-    
+    //Clock Is auto configured to 84Mhz for us
+    __enable_irq();
+
+    enable_SysTick();
     while (1)
     {
-	    if (!(GPIOC->IDR & GPIO_IDR_ID13_Msk))
+	    if (ticks >= 5000)	//Should Be 5 Seconds Before LED Turns On!
 	    {
 		    GPIOA->BSRR |= GPIO_BSRR_BS5;
-	    }
-	    else
-	    {
-		    GPIOA->BSRR |= GPIO_BSRR_BR5;
 	    }
     }
 }
 
+static void enable_SysTick(void)
+{
+	SysTick->LOAD = (uint32_t) ((84000000/1000)-1);
+	NVIC_SetPriority(SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL);
+	SysTick->VAL = 0UL;
+	SysTick->CTRL |= (SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk );
+	NVIC_EnableIRQ(SysTick_IRQn);
+}
+	
+
+static void Delay_ms(int ms)
+{
+	uint32_t time = ticks+ms;
+
+	while (ticks <= time);
+}
+
+void SysTick_Handler(void) //Interrupt Routine
+{
+	ticks++;
+	GPIOA->ODR ^= GPIO_ODR_OD5;
+}
