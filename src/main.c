@@ -3,7 +3,7 @@
 #include "core_cm4.h"
 
 static volatile uint32_t ticks = 0;
-static uint8_t addr = 0;
+static volatile uint8_t addr = 0;
 
 static void enable_SysTick(void);
 static void Delay_ms(int ms);
@@ -27,6 +27,10 @@ int main(void)
     enable_SysTick();
     
     //I2C Task    
+    I2C1->CR1   |= I2C_CR1_SWRST;
+    Delay_ms(5);
+    I2C1->CR1   &= ~I2C_CR1_SWRST;
+
     I2C1->CR2   |= 42;
     I2C1->TRISE |= 43;
     I2C1->CCR   |= 180;
@@ -51,6 +55,8 @@ int main(void)
     while (!(I2C1->SR1 & I2C_SR1_SB));
 
     I2C1->DR = (0x68<<1 | 1);
+    while (!(I2C1->SR1 * I2C_SR1_ADDR));
+    (void)I2C1->SR2;
     while (!(I2C1->SR1 & I2C_SR1_RXNE));
 
     addr = (uint8_t)I2C1->DR;
