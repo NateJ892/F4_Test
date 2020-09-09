@@ -14,14 +14,15 @@ CFLAGS += -ggdb
 CFLAGS += -Wall -O2
 
 CFLAGS += -I include/CMSIS
+CFLAGS += -I include/
 
 .PHONY: all clean
 
 all: main.elf
 	$(OBJCOPY) -O binary -S $< main.bin
 
-main.elf: build/main.o build/Startup.o
-	$(LD) -nostartfiles -T Flash.ld -o $@ $^
+main.elf: build/main.o build/Startup.o build/i2c.o build/utils.o
+	$(LD) -nostartfiles -T Flash.ld -Map main.map -o $@ $^
 
 build/%.o: src/%.c
 	if [ ! -d "./build" ]; then mkdir build; fi

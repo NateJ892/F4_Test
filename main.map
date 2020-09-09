@@ -1,0 +1,279 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+SystemCoreClock     0x4               build/Startup.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x0000000008000000 0x0000000000080000 xr
+RAM              0x0000000020000000 0x0000000000018000 xrw
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+
+.text           0x0000000008000000      0x4c4
+ *(.isr_vector)
+ .isr_vector    0x0000000008000000      0x194 build/Startup.o
+                0x0000000008000000                __vector_table
+ *(.text*)
+ .text          0x0000000008000194       0x1c build/main.o
+                0x0000000008000194                SysTick_Handler
+ .text.startup  0x00000000080001b0       0xbc build/main.o
+                0x00000000080001b0                main
+ .text          0x000000000800026c      0x124 build/Startup.o
+                0x000000000800026c                SystemInit
+                0x0000000008000378                Reset_Handler
+                0x0000000008000388                RTC_Alarm_IRQHandler
+                0x0000000008000388                EXTI2_IRQHandler
+                0x0000000008000388                DebugMon_Handler
+                0x0000000008000388                SPI4_IRQHandler
+                0x0000000008000388                TIM1_CC_IRQHandler
+                0x0000000008000388                DMA2_Stream5_IRQHandler
+                0x0000000008000388                HardFault_Handler
+                0x0000000008000388                DMA1_Stream5_IRQHandler
+                0x0000000008000388                PVD_IRQHandler
+                0x0000000008000388                SDIO_IRQHandler
+                0x0000000008000388                TAMP_STAMP_IRQHandler
+                0x0000000008000388                PendSV_Handler
+                0x0000000008000388                NMI_Handler
+                0x0000000008000388                EXTI3_IRQHandler
+                0x0000000008000388                TIM1_UP_TIM10_IRQHandler
+                0x0000000008000388                I2C3_ER_IRQHandler
+                0x0000000008000388                EXTI0_IRQHandler
+                0x0000000008000388                I2C2_EV_IRQHandler
+                0x0000000008000388                DMA1_Stream2_IRQHandler
+                0x0000000008000388                FPU_IRQHandler
+                0x0000000008000388                UsageFault_Handler
+                0x0000000008000388                DMA2_Stream2_IRQHandler
+                0x0000000008000388                SPI1_IRQHandler
+                0x0000000008000388                TIM1_BRK_TIM9_IRQHandler
+                0x0000000008000388                DMA2_Stream3_IRQHandler
+                0x0000000008000388                USART6_IRQHandler
+                0x0000000008000388                DMA2_Stream0_IRQHandler
+                0x0000000008000388                TIM4_IRQHandler
+                0x0000000008000388                I2C1_EV_IRQHandler
+                0x0000000008000388                DMA1_Stream6_IRQHandler
+                0x0000000008000388                DMA1_Stream1_IRQHandler
+                0x0000000008000388                TIM3_IRQHandler
+                0x0000000008000388                RCC_IRQHandler
+                0x0000000008000388                Default_Handler
+                0x0000000008000388                EXTI15_10_IRQHandler
+                0x0000000008000388                ADC_IRQHandler
+                0x0000000008000388                DMA1_Stream7_IRQHandler
+                0x0000000008000388                TIM5_IRQHandler
+                0x0000000008000388                DMA2_Stream7_IRQHandler
+                0x0000000008000388                I2C3_EV_IRQHandler
+                0x0000000008000388                EXTI9_5_IRQHandler
+                0x0000000008000388                RTC_WKUP_IRQHandler
+                0x0000000008000388                SPI2_IRQHandler
+                0x0000000008000388                MemManage_Handler
+                0x0000000008000388                DMA1_Stream0_IRQHandler
+                0x0000000008000388                SVC_Handler
+                0x0000000008000388                EXTI4_IRQHandler
+                0x0000000008000388                WWDG_IRQHandler
+                0x0000000008000388                TIM2_IRQHandler
+                0x0000000008000388                OTG_FS_WKUP_IRQHandler
+                0x0000000008000388                TIM1_TRG_COM_TIM11_IRQHandler
+                0x0000000008000388                EXTI1_IRQHandler
+                0x0000000008000388                USART2_IRQHandler
+                0x0000000008000388                I2C2_ER_IRQHandler
+                0x0000000008000388                DMA2_Stream1_IRQHandler
+                0x0000000008000388                FLASH_IRQHandler
+                0x0000000008000388                DMA2_Stream4_IRQHandler
+                0x0000000008000388                BusFault_Handler
+                0x0000000008000388                USART1_IRQHandler
+                0x0000000008000388                OTG_FS_IRQHandler
+                0x0000000008000388                SPI3_IRQHandler
+                0x0000000008000388                DMA1_Stream4_IRQHandler
+                0x0000000008000388                I2C1_ER_IRQHandler
+                0x0000000008000388                DMA2_Stream6_IRQHandler
+                0x0000000008000388                DMA1_Stream3_IRQHandler
+                0x000000000800038c                SystemCoreClockUpdate
+ .text          0x0000000008000390      0x120 build/i2c.o
+                0x0000000008000390                I2C_Init
+                0x00000000080003d8                I2C_DeInit
+                0x00000000080003e8                I2C_Start
+                0x000000000800040c                I2C_Stop
+                0x0000000008000424                I2C_WriteBuffer
+                0x0000000008000454                I2C_Write
+                0x0000000008000470                I2C_Read
+ .text          0x00000000080004b0       0x14 build/utils.o
+                0x00000000080004b0                Delay_ms
+ *(.init)
+ *(.fini)
+ *crtbegin.o(.ctors)
+ *crtbegin?.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
+ *(SORT_BY_NAME(.ctors.*))
+ *(.ctors)
+ *crtbegin.o(.dtors)
+ *crtbegin?.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
+ *(SORT_BY_NAME(.dtors.*))
+ *(.dtors)
+ *(.rodata*)
+ *(.eh_frame*)
+
+.glue_7         0x00000000080004c4        0x0
+ .glue_7        0x00000000080004c4        0x0 linker stubs
+
+.glue_7t        0x00000000080004c4        0x0
+ .glue_7t       0x00000000080004c4        0x0 linker stubs
+
+.vfp11_veneer   0x00000000080004c4        0x0
+ .vfp11_veneer  0x00000000080004c4        0x0 linker stubs
+
+.v4_bx          0x00000000080004c4        0x0
+ .v4_bx         0x00000000080004c4        0x0 linker stubs
+
+.iplt           0x00000000080004c4        0x0
+ .iplt          0x00000000080004c4        0x0 build/main.o
+
+.rel.dyn        0x00000000080004c4        0x0
+ .rel.iplt      0x00000000080004c4        0x0 build/main.o
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x00000000080004c4                __exidx_start = .
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x00000000080004c4                __exidx_end = .
+                0x00000000080004c4                __etext = .
+
+.data           0x0000000020000000        0x0 load address 0x00000000080004c4
+                0x0000000020000000                __data_start__ = .
+ *(vtable)
+ *(.data*)
+ .data          0x0000000020000000        0x0 build/main.o
+ .data          0x0000000020000000        0x0 build/Startup.o
+ .data          0x0000000020000000        0x0 build/i2c.o
+ .data          0x0000000020000000        0x0 build/utils.o
+                0x0000000020000000                . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__preinit_array_start = .)
+ *(.preinit_array)
+                [!provide]                        PROVIDE (__preinit_array_end = .)
+                0x0000000020000000                . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__init_array_start = .)
+ *(SORT_BY_NAME(.init_array.*))
+ *(.init_array)
+                [!provide]                        PROVIDE (__init_array_end = .)
+                0x0000000020000000                . = ALIGN (0x4)
+                [!provide]                        PROVIDE (__fini_array_start = .)
+ *(SORT_BY_NAME(.fini_array.*))
+ *(.fini_array)
+                [!provide]                        PROVIDE (__fini_array_end = .)
+ *(.jcr*)
+                0x0000000020000000                . = ALIGN (0x4)
+                0x0000000020000000                __data_end__ = .
+
+.igot.plt       0x0000000020000000        0x0 load address 0x00000000080004c4
+ .igot.plt      0x0000000020000000        0x0 build/main.o
+
+.bss            0x0000000020000000        0xc load address 0x00000000080004c4
+                0x0000000020000000                . = ALIGN (0x4)
+                0x0000000020000000                __bss_start__ = .
+ *(.bss*)
+ .bss           0x0000000020000000        0x8 build/main.o
+                0x0000000020000004                ticks
+ .bss           0x0000000020000008        0x0 build/Startup.o
+ .bss           0x0000000020000008        0x0 build/i2c.o
+ .bss           0x0000000020000008        0x0 build/utils.o
+ *(COMMON)
+ COMMON         0x0000000020000008        0x4 build/Startup.o
+                0x0000000020000008                SystemCoreClock
+                0x000000002000000c                . = ALIGN (0x4)
+                0x000000002000000c                __bss_end__ = .
+
+.heap           0x000000002000000c        0x0
+                0x000000002000000c                __end__ = .
+                [!provide]                        PROVIDE (end = .)
+ *(.heap*)
+                0x000000002000000c                __HeapLimit = .
+
+.stack_dummy    0x000000002000000c        0x0
+ *(.stack*)
+                0x0000000020018000                __StackTop = (ORIGIN (RAM) + LENGTH (RAM))
+                0x0000000020018000                __StackLimit = (__StackTop - SIZEOF (.stack_dummy))
+                0x0000000020018000                PROVIDE (__stack = __StackTop)
+                0x0000000000000001                ASSERT ((__StackLimit >= __HeapLimit), region RAM overflowed with stack)
+LOAD build/main.o
+LOAD build/Startup.o
+LOAD build/i2c.o
+LOAD build/utils.o
+OUTPUT(main.elf elf32-littlearm)
+LOAD linker stubs
+
+.debug_info     0x0000000000000000     0x13cc
+ .debug_info    0x0000000000000000      0xa5e build/main.o
+ .debug_info    0x0000000000000a5e      0x561 build/Startup.o
+ .debug_info    0x0000000000000fbf      0x2cd build/i2c.o
+ .debug_info    0x000000000000128c      0x140 build/utils.o
+
+.debug_abbrev   0x0000000000000000      0x5f7
+ .debug_abbrev  0x0000000000000000      0x237 build/main.o
+ .debug_abbrev  0x0000000000000237      0x19e build/Startup.o
+ .debug_abbrev  0x00000000000003d5      0x161 build/i2c.o
+ .debug_abbrev  0x0000000000000536       0xc1 build/utils.o
+
+.debug_loc      0x0000000000000000      0x215
+ .debug_loc     0x0000000000000000       0x44 build/main.o
+ .debug_loc     0x0000000000000044       0x93 build/Startup.o
+ .debug_loc     0x00000000000000d7      0x104 build/i2c.o
+ .debug_loc     0x00000000000001db       0x3a build/utils.o
+
+.debug_aranges  0x0000000000000000       0x88
+ .debug_aranges
+                0x0000000000000000       0x28 build/main.o
+ .debug_aranges
+                0x0000000000000028       0x20 build/Startup.o
+ .debug_aranges
+                0x0000000000000048       0x20 build/i2c.o
+ .debug_aranges
+                0x0000000000000068       0x20 build/utils.o
+
+.debug_ranges   0x0000000000000000       0x70
+ .debug_ranges  0x0000000000000000       0x70 build/main.o
+
+.debug_line     0x0000000000000000      0x8c3
+ .debug_line    0x0000000000000000      0x253 build/main.o
+ .debug_line    0x0000000000000253      0x2b4 build/Startup.o
+ .debug_line    0x0000000000000507      0x2d9 build/i2c.o
+ .debug_line    0x00000000000007e0       0xe3 build/utils.o
+
+.debug_str      0x0000000000000000      0x90b
+ .debug_str     0x0000000000000000      0x780 build/main.o
+                                        0x7c6 (size before relaxing)
+ .debug_str     0x0000000000000780      0x128 build/Startup.o
+                                        0x3dc (size before relaxing)
+ .debug_str     0x00000000000008a8       0x52 build/i2c.o
+                                        0x236 (size before relaxing)
+ .debug_str     0x00000000000008fa       0x11 build/utils.o
+                                        0x1c1 (size before relaxing)
+
+.comment        0x0000000000000000       0x59
+ .comment       0x0000000000000000       0x59 build/main.o
+                                         0x5a (size before relaxing)
+ .comment       0x0000000000000059       0x5a build/Startup.o
+ .comment       0x0000000000000059       0x5a build/i2c.o
+ .comment       0x0000000000000059       0x5a build/utils.o
+
+.ARM.attributes
+                0x0000000000000000       0x34
+ .ARM.attributes
+                0x0000000000000000       0x34 build/main.o
+ .ARM.attributes
+                0x0000000000000034       0x34 build/Startup.o
+ .ARM.attributes
+                0x0000000000000068       0x34 build/i2c.o
+ .ARM.attributes
+                0x000000000000009c       0x34 build/utils.o
+
+.debug_frame    0x0000000000000000      0x14c
+ .debug_frame   0x0000000000000000       0x38 build/main.o
+ .debug_frame   0x0000000000000038       0x6c build/Startup.o
+ .debug_frame   0x00000000000000a4       0x88 build/i2c.o
+ .debug_frame   0x000000000000012c       0x20 build/utils.o
